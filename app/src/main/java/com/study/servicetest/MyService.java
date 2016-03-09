@@ -2,6 +2,7 @@ package com.study.servicetest;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -9,6 +10,8 @@ import android.util.Log;
  * Created by WXB506 on 2016/3/9.
  */
 public class MyService extends Service {
+
+    private DownloadBinder mBinder = new DownloadBinder();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -31,5 +34,21 @@ public class MyService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d("MyService", "onDestroy executed");
+    }
+
+    class DownloadBinder extends Binder {
+
+        public void startDownload() {
+            Log.d("MyService", "startDownload executed");
+        }
+
+        public int getProgress() {
+            Log.d("MyService", "getProgress exectued");
+            return 0;
+        }
+
+        public IBinder onBind(Intent intent) {
+            return mBinder;
+        }
     }
 }
