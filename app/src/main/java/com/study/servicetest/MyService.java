@@ -1,9 +1,12 @@
 package com.study.servicetest;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 /**
@@ -21,6 +24,18 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
+        notification.setSmallIcon(R.mipmap.ic_launcher);
+        notification.setContentTitle("Foreground Service");
+        notification.setContentText("This is Foreground Service");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        notification.setContentIntent(pendingIntent);
+        startForeground(1, notification.build());
+
         Log.d("MyService", "onCreate executed");
     }
 

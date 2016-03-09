@@ -4,3 +4,6 @@
 		-    return null;
 		+    return mBinder;
 		}
+		
+问题：Notification使用
+解决：Notification可以正常显示了
